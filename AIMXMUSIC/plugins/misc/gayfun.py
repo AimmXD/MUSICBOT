@@ -38,7 +38,7 @@ def gay_calculator_command(client, message: Message):
 @app.on_message(filters.command("logo"))
 async def logo(app, msg: Message):
     if len(msg.command) == 1:
-       return await msg.reply_text("Usage:\n\n /logo daxx")
+       return await msg.reply_text("Usage:\n\n /logo AimX")
     logo_name = msg.text.split(" ", 1)[1]
     API = f"https://api.sdbots.tech/logohq?text={logo_name}"
     req = requests.get(API).url
@@ -48,7 +48,7 @@ async def logo(app, msg: Message):
 @app.on_message(filters.command("animelogo"))
 async def logo(app, msg: Message):
     if len(msg.command) == 1:
-       return await msg.reply_text("Usage:\n\n /animelogo daxx")
+       return await msg.reply_text("Usage:\n\n /animelogo AimX")
     logo_name = msg.text.split(" ", 1)[1]
     API = f"https://api.sdbots.tech/anime-logo?name={logo_name}"
     req = requests.get(API).url
