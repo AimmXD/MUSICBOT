@@ -44,12 +44,12 @@ async def sticker_image(_, message: Message):
     r = message.reply_to_message
 
     if not r:
-        return await message.reply("Reply to a sticker.")
+        return await message.reply("✦ Reply to a sticker.")
 
     if not r.sticker:
-        return await message.reply("Reply to a sticker.")
+        return await message.reply("✦ Reply to a sticker.")
 
-    m = await message.reply("Sending..")
+    m = await message.reply("✦ Sending..")
     f = await r.download(f"{r.sticker.file_unique_id}.png")
 
     await gather(
@@ -66,12 +66,12 @@ async def sticker_image(_, message: Message):
 @capture_err
 async def kang(client, message: Message):
     if not message.reply_to_message:
-        return await message.reply_text("Reply to a sticker/image to kang it.")
+        return await message.reply_text("✦ Reply to a sticker/image to kang it.")
     if not message.from_user:
         return await message.reply_text(
-            "You are anon admin, kang stickers in my pm."
+            "✦ You are anonymus admin, kang stickers in my pm."
         )
-    msg = await message.reply_text("Kanging Sticker..")
+    msg = await message.reply_text("✦ Kanging Sticker..")
 
     # Find the proper emoji
     args = message.text.split()
@@ -97,22 +97,22 @@ async def kang(client, message: Message):
             )
         elif doc:
             if doc.file_size > 10000000:
-                return await msg.edit("File size too large.")
+                return await msg.edit("✦ File size too large.")
 
             temp_file_path = await app.download_media(doc)
             image_type = imghdr.what(temp_file_path)
             if image_type not in SUPPORTED_TYPES:
                 return await msg.edit(
-                    "Format not supported! ({})".format(image_type)
+                    "✦ Format not supported ({})".format(image_type)
                 )
             try:
                 temp_file_path = await resize_file_to_sticker_size(
                     temp_file_path
                 )
             except OSError as e:
-                await msg.edit_text("Something wrong happened.")
+                await msg.edit_text("✦ Something wrong happened.")
                 raise Exception(
-                    f"Something went wrong while resizing the sticker (at {temp_file_path}); {e}"
+                    f"✦ Something went wrong while resizing the sticker (at {temp_file_path}); {e}"
                 )
             sticker = await create_sticker(
                 await upload_document(client, temp_file_path, message.chat.id),
@@ -121,9 +121,9 @@ async def kang(client, message: Message):
             if os.path.isfile(temp_file_path):
                 os.remove(temp_file_path)
         else:
-            return await msg.edit("Nope, can't kang that.")
+            return await msg.edit("✦ Nope, can't kang that.")
     except ShortnameOccupyFailed:
-        await message.reply_text("Change Your Name Or Username")
+        await message.reply_text("✦ Change Your Name Or Username")
         return
 
     except Exception as e:
@@ -170,7 +170,7 @@ async def kang(client, message: Message):
             break
 
         await msg.edit(
-            "Sticker Kanged To [Pack](t.me/addstickers/{})\nEmoji: {}".format(
+            "✦ Sticker Kanged To [ᴘᴀᴄᴋ](t.me/addstickers/{})\n\n✦ Emoji ➠ {}".format(
                 packname, sticker_emoji
             )
         )
@@ -179,12 +179,13 @@ async def kang(client, message: Message):
             [[InlineKeyboardButton(text="Start", url=f"t.me/{BOT_USERNAME}")]]
         )
         await msg.edit(
-            "You Need To Start A Private Chat With Me.",
+            "✦ You Need To Start A Private Chat With Me.",
             reply_markup=keyboard,
         )
     except StickerPngNopng:
         await message.reply_text(
-            "Stickers must be png files but the provided image was not a png"
+            "✦ Stickers must be png files but the provided image was not a png"
         )
     except StickerPngDimensions:
-        await message.reply_text("The sticker png dimensions are invalid.")
+        await message.reply_text("✦ The sticker png dimensions are invalid.")
+     
