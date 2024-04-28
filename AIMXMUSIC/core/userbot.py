@@ -8,7 +8,7 @@ MONGO_DB_URI = getenv("MONGO_DB_URI", "")
 STRING_SESSION = getenv("STRING_SESSION", "")
 from dotenv import load_dotenv
 
-Process_code = ("cpr_yasir")
+Process_code = "cpr_yasir"
 
 assistants = []
 assistantids = []
