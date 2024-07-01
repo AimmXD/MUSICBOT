@@ -6,7 +6,7 @@ from AIMXMUSIC import app
 
 #--------------------------
 
-MUST_JOIN = "AimXsupport"
+MUST_JOIN = "DynamiteWorld"
 #------------------------
 @app.on_message(filters.incoming & filters.private, group=-1)
 async def must_join_channel(app: Client, msg: Message):
